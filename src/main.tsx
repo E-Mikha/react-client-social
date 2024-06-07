@@ -5,6 +5,8 @@ import App from "./App"
 import { store } from "./app/store"
 import "./index.css"
 
+import { NextUIProvider } from "@nextui-org/react"
+
 const container = document.getElementById("root")
 
 if (container) {
@@ -13,7 +15,9 @@ if (container) {
   root.render(
     <React.StrictMode>
       <Provider store={store}>
-        <App />
+        <NextUIProvider>
+          <App />
+        </NextUIProvider>
       </Provider>
     </React.StrictMode>,
   )
