@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form"
 import { Input } from "../components/input"
 import { Button, Link } from "@nextui-org/react"
 import { useRegisterMutation } from "../app/services/userApi"
+import { hasErrorField } from "../utils/has-error-field"
 
 type Register = {
   email: string
