@@ -36,7 +36,7 @@ export const Register: React.FC<Props> = ({ setSelected }) => {
 
   const onSubmit = async (data: Register) => {
     try {
-      await register(data).unwrap
+      await register(data).unwrap()
       setSelected("login")
     } catch (error) {
       if (hasErrorField(error)) {
@@ -83,7 +83,7 @@ export const Register: React.FC<Props> = ({ setSelected }) => {
       </p>
       <div className="flex gap-2 justify-end">
         <Button fullWidth color="primary" type="submit" isLoading={isLoading}>
-          Войти
+          Зарегистрироваться
         </Button>
       </div>
     </form>
