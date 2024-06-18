@@ -22,6 +22,7 @@ import { selectCurrent } from "../../features/user/userSlice"
 import { User } from "../user"
 import { formatToClientDate } from "../../utils/format-to-client-date"
 import { RiDeleteBinLine } from "react-icons/ri"
+import { Typography } from "../typography"
 
 type Props = {
   avatarUrl: string
@@ -80,7 +81,9 @@ export const Card: React.FC<Props> = ({
           </div>
         )}
       </CardHeader>
-      <CardBody className="px-3 py-2 mb-5"></CardBody>
+      <CardBody className="px-3 py-2 mb-5">
+        <Typography>{content}</Typography>
+      </CardBody>
     </NextUiCard>
   )
 }
