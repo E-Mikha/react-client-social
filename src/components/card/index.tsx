@@ -1,6 +1,11 @@
 import React, { useState } from "react"
 
-import { CardHeader, Card as NextUiCard } from "@nextui-org/react"
+import {
+  CardBody,
+  CardHeader,
+  Card as NextUiCard,
+  Spinner,
+} from "@nextui-org/react"
 import {
   useLikePostMutation,
   useUnlikePostMutation,
@@ -14,6 +19,9 @@ import { useDeleteCommentMutation } from "../../app/services/commentsApi"
 import { Link, useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { selectCurrent } from "../../features/user/userSlice"
+import { User } from "../user"
+import { formatToClientDate } from "../../utils/format-to-client-date"
+import { RiDeleteBinLine } from "react-icons/ri"
 
 type Props = {
   avatarUrl: string
@@ -37,7 +45,7 @@ export const Card: React.FC<Props> = ({
   commentId = "",
   likesCount = 0,
   commentsCount = 0,
-  createdAt: Date,
+  createdAt,
   id = "",
   cardFor = "post",
   likedByUser = false,
@@ -54,8 +62,25 @@ export const Card: React.FC<Props> = ({
   return (
     <NextUiCard>
       <CardHeader className="justify-beetwen items-center bg-transparent">
-        <Link to={`/user/${authorId}`}></Link>
+        <Link to={`/user/${authorId}`}>
+          <User
+            name={name}
+            className="text-small font-semibold leading-none text-default-600"
+            avatarUrl={avatarUrl}
+            description={createdAt && formatToClientDate(createdAt)}
+          />
+        </Link>
+        {authorId === currentUser?.id && (
+          <div className="cursor-pointer">
+            {deletePostStatus.isLoading || deleteCommentStatus.isLoading ? (
+              <Spinner />
+            ) : (
+              <RiDeleteBinLine />
+            )}
+          </div>
+        )}
       </CardHeader>
+      <CardBody className="px-3 py-2 mb-5"></CardBody>
     </NextUiCard>
   )
 }
