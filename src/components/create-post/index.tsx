@@ -44,7 +44,7 @@ export const CreatePost = () => {
           <Textarea
             {...field}
             labelPlacement="outside"
-            placeholder="О чем думаете"
+            placeholder="О чем думаете?"
             className="mb-5"
           />
         )}
