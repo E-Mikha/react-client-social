@@ -15,6 +15,7 @@ export const GoBack = () => {
       className="text-default-500 flex items-center gap-2 mb-10 cursor-pointer"
     >
       <FaRegArrowAltCircleLeft />
+      Назад
     </div>
   )
 }
