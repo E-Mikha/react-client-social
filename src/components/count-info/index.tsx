@@ -2,7 +2,7 @@ import React from "react"
 
 type Props = {
   count: number
-  title: null
+  title: string
 }
 
 export const CountInfo: React.FC<Props> = ({ count, title }) => {
