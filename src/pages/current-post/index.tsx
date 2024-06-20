@@ -54,7 +54,6 @@ export const CurrentPost = () => {
                 authorId={comment.userId}
                 commentId={comment.id}
                 id={id}
-                commentsCount={comments.length}
               />
             ))
           : null}
