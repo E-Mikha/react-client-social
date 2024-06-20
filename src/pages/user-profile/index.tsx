@@ -19,6 +19,8 @@ import {
   MdOutlinePersonAddDisabled,
 } from "react-icons/md"
 import { CiEdit } from "react-icons/ci"
+import { ProfileInfo } from "../../components/profile-info"
+import { formatToClientDate } from "../../utils/format-to-client-date"
 
 export const UserProfile = () => {
   const { id } = useParams<{ id: string }>()
@@ -79,7 +81,15 @@ export const UserProfile = () => {
           </div>
         </Card>
 
-        <Card className="flex flex-col space-y-4 p-5 flex-1"></Card>
+        <Card className="flex flex-col space-y-4 p-5 flex-1">
+          <ProfileInfo title="Почта" info={data.email} />
+          <ProfileInfo title="Местоположение" info={data.location} />
+          <ProfileInfo
+            title="Дата рождения"
+            info={formatToClientDate(data.dateOfBirth)}
+          />
+          <ProfileInfo title="Обо мне" info={data.bio} />
+        </Card>
       </div>
     </>
   )
