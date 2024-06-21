@@ -1,6 +1,6 @@
 import { api } from "./api"
 
-export const followsApi = api.injectEndpoints({
+export const followApi = api.injectEndpoints({
   endpoints: builder => ({
     followUser: builder.mutation<void, { followingId: string }>({
       query: body => ({
@@ -18,8 +18,8 @@ export const followsApi = api.injectEndpoints({
   }),
 })
 
-export const { useFollowUserMutation, useUnfollowUserMutation } = followsApi
+export const { useFollowUserMutation, useUnfollowUserMutation } = followApi
 
 export const {
   endpoints: { followUser, unfollowUser },
-} = followsApi
+} = followApi
