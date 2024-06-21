@@ -30,7 +30,7 @@ export const UserProfile = () => {
   const { data } = useGetUserByIdQuery(id ?? "")
   const [followUser] = useFollowUserMutation()
   const [unfollowUser] = useUnfollowUserMutation()
-  const [triggerGetUserByIdAuery] = useLazyGetUserByIdQuery()
+  const [triggerGetUserByIdQuery] = useLazyGetUserByIdQuery()
   const [triggerCurrentQuyery] = useLazyCurrentQuery()
 
   const dispatch = useDispatch()
@@ -41,6 +41,20 @@ export const UserProfile = () => {
     },
     [],
   )
+
+  const handleFolow = async () => {
+    try {
+      if (id) {
+        data?.isFollowing
+          ? await unfollowUser(id).unwrap()
+          : await followUser({ followingId: id }).unwrap()
+
+        await triggerGetUserByIdQuery(id)
+
+        await triggerCurrentQuyery()
+      }
+    } catch (error) {}
+  }
 
   if (!data) {
     return null
@@ -66,6 +80,7 @@ export const UserProfile = () => {
                 color={data.isFollowing ? "default" : "primary"}
                 variant="flat"
                 className="gap-2"
+                onClick={handleFolow}
                 endContent={
                   data.isFollowing ? (
                     <MdOutlinePersonAddDisabled />
