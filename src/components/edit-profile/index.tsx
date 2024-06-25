@@ -9,6 +9,7 @@ import {
   Modal,
   ModalBody,
   ModalContent,
+  ModalFooter,
   ModalHeader,
   Textarea,
 } from "@nextui-org/react"
@@ -41,6 +42,12 @@ export const EditProfile: React.FC<Props> = ({ isOpen, onClose, user }) => {
     },
   })
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files !== null) {
+      setSelectedFile(e.target.files[0])
+    }
+  }
+
   return (
     <Modal
       isOpen={isOpen}
@@ -65,8 +72,9 @@ export const EditProfile: React.FC<Props> = ({ isOpen, onClose, user }) => {
                 <Input control={control} name="name" label="Имя" type="text" />
                 <input
                   type="file"
-                  name="avatartUrl"
+                  name="avatarUrl"
                   placeholder="Выберете файл"
+                  onChange={handleFileChange}
                 />
                 <Input
                   control={control}
@@ -105,6 +113,11 @@ export const EditProfile: React.FC<Props> = ({ isOpen, onClose, user }) => {
                 </div>
               </form>
             </ModalBody>
+            <ModalFooter>
+              <Button color="danger" variant="light" onPress={onClose}>
+                Закрыть
+              </Button>
+            </ModalFooter>
           </>
         )}
       </ModalContent>
