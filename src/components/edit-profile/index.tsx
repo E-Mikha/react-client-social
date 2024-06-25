@@ -16,6 +16,7 @@ import {
 import { Input } from "../input"
 import { MdOutlineEmail } from "react-icons/md"
 import { ErrorMessage } from "../error-message"
+import { hasErrorField } from "../../utils/has-error-field"
 
 type Props = {
   isOpen: boolean
@@ -48,6 +49,30 @@ export const EditProfile: React.FC<Props> = ({ isOpen, onClose, user }) => {
     }
   }
 
+  const onSubmit = async (data: User) => {
+    if (id) {
+      try {
+        const formData = new FormData()
+        data.name && formData.append("name", data.name)
+        data.email &&
+          data.email !== user?.email &&
+          formData.append("email", data.email)
+        data.dateOfBirth &&
+          formData.append(
+            "dateOfBirth",
+            new Date(data.dateOfBirth).toISOString(),
+          )
+        data.bio && formData.append("bio", data.bio)
+        data.location && formData.append("location", data.location)
+        selectedFile && formData.append("avatar")
+      } catch (error) {
+        if (hasErrorField(error)) {
+          setError(error.data.error)
+        }
+      }
+    }
+  }
+
   return (
     <Modal
       isOpen={isOpen}
@@ -61,7 +86,10 @@ export const EditProfile: React.FC<Props> = ({ isOpen, onClose, user }) => {
               Изменение профиля
             </ModalHeader>
             <ModalBody>
-              <form className="flex flex-col gap-4">
+              <form
+                className="flex flex-col gap-4"
+                onSubmit={handleSubmit(onSubmit)}
+              >
                 <Input
                   control={control}
                   name="email"
