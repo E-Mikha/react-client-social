@@ -64,7 +64,10 @@ export const EditProfile: React.FC<Props> = ({ isOpen, onClose, user }) => {
           )
         data.bio && formData.append("bio", data.bio)
         data.location && formData.append("location", data.location)
-        selectedFile && formData.append("avatar")
+        selectedFile && formData.append("avatar", selectedFile)
+
+        await updateUser({ userData: formData, id }).unwrap()
+        onClose()
       } catch (error) {
         if (hasErrorField(error)) {
           setError(error.data.error)
