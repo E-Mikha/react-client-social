@@ -43,9 +43,9 @@ export const EditProfile: React.FC<Props> = ({ isOpen, onClose, user }) => {
     },
   })
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files !== null) {
-      setSelectedFile(e.target.files[0])
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files !== null) {
+      setSelectedFile(event.target.files[0])
     }
   }
 
@@ -102,9 +102,9 @@ export const EditProfile: React.FC<Props> = ({ isOpen, onClose, user }) => {
                 />
                 <Input control={control} name="name" label="Имя" type="text" />
                 <input
-                  type="file"
                   name="avatarUrl"
                   placeholder="Выберете файл"
+                  type="file"
                   onChange={handleFileChange}
                 />
                 <Input
