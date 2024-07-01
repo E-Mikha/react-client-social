@@ -1,4 +1,4 @@
-FROM node:14 as build
+FROM node:14 AS build
 
 WORKDIR /usr/src/app
 
@@ -16,4 +16,6 @@ COPY --from=build /usr/src/app/build /usr/share/nginx/html
 
 COPY nginx.conf /ect/nginx/conf.d/default.conf
 
-CMD ["nginx", "-g", "daemon off"]
+EXPOSE 8000
+
+CMD ["nginx", "-g", "daemon off;"]
